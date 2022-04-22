@@ -17,18 +17,12 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
+
         this.studentRepository = studentRepository;
     }
 
     public List<Student> getStudent(){
         return studentRepository.findAll();
-//        return List.of(new Student
-//                (1L,
-//                        "Korede",
-//                        "salamikehinde345@gmail.com",
-//                        LocalDate.of(1999, Month.MARCH,9),
-//                        23)
-//        );
     }
 
     public void addNewStudent( Student student) {
@@ -39,18 +33,19 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public void deleteStudent(Long id) {
-      boolean theId = studentRepository.existsById(id);
+    public void deleteStudent(Long StudentId) {
+      boolean theId = studentRepository.existsById(StudentId);
       if (!theId){
-          throw new IllegalStateException("The " + id + " does not exist");
+          throw new IllegalStateException("The " + StudentId + " does not exist");
       }
-      studentRepository.deleteById(id);
+      studentRepository.deleteById(StudentId);
     }
 
     @Transactional //we don't use query when using transactional annotation
-    public void updateStudent(Long id, String name, String email){
-       Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-             "student with " + id + " does not exist"
+    //Transactional creates a proxy class that intercept a call from external source
+    public void updateStudent(Long StudentId, String name, String email){
+       Student student = studentRepository.findById(StudentId).orElseThrow(() -> new IllegalStateException(
+             "student with " + StudentId + " does not exist"
        ) );
 
        if (name != null && name.length() > 0 && !Objects.equals(student.getName(),name)){

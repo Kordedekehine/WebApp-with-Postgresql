@@ -10,22 +10,22 @@ import java.util.List;
 @Configuration
 public class StudentConfig {
 
-    CommandLineRunner commandLineRunner(StudentRepository studentRepository) {
+    CommandLineRunner commandLineRunner(StudentRepository repository) {
         return args -> {
             Student korede = new Student
-                    (1L,
-                            "Korede",
+                    (
+                            "korede",
                             "salamikehinde345@gmail.com",
                             LocalDate.of(1999, Month.MARCH, 9)
                             );
 
-            Student salami = new Student
-                    (1L,
-                            "Salami",
+            Student salami = new Student(
+                    "Salami",
                             "salamikorede@gmail.com",
-                            LocalDate.of(1978, Month.APRIL, 9));
+                            LocalDate.of(1978, Month.APRIL, 9)
+            );
 
-                   studentRepository.saveAll(List.of(korede,salami));
+                   repository.saveAll(List.of(korede,salami));
         };
     }
 }

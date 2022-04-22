@@ -21,17 +21,18 @@ public class StudentController {
     //we use get mapping because we want to get something out of server
     @GetMapping
     public List<Student> getStudent(){
-     return studentService.getStudent();
+        return studentService.getStudent();
     }
 
     @PostMapping
     public void registerNewStudent(@RequestBody Student student){
+
         studentService.addNewStudent(student);
     }
 
     @DeleteMapping(path = "{studentId}")
     public void deleteStudent(@PathVariable("studentId") Long id){
-      studentService.deleteStudent(id);
+        studentService.deleteStudent(id);
     }
 
     @PutMapping(path = "{studentId}") //Update should be change of id, name and email
